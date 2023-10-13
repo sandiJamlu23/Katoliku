@@ -20,8 +20,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.loc.newsapp.presentation.onBoarding.Dimens.PageIndicatorWidth
 import com.loc.newsapp.presentation.onBoarding.Dimens.mediumPadding2
+import com.loc.newsapp.presentation.onBoarding.common.KatolikuButton
 import com.loc.newsapp.presentation.onBoarding.common.KatolikuTextButton
-import com.loc.newsapp.presentation.onBoarding.common.NewsButton
 import com.loc.newsapp.presentation.onBoarding.components.OnBoardingPage
 import com.loc.newsapp.presentation.onBoarding.components.PageIndicator
 import kotlinx.coroutines.launch
@@ -29,9 +29,13 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen () {
-    Column(modifier = Modifier
-        .fillMaxSize()) {
+fun OnBoardingScreen (
+    event:(OnBoardingEvent) -> Unit
+) {
+
+    Column(modifier = Modifier.fillMaxSize())
+    //  .navigationBarsPadding()
+     {
         val pagerState = rememberPagerState(initialPage = 0)
         {
             pages.size
@@ -39,7 +43,7 @@ fun OnBoardingScreen () {
         val buttonState = remember {
             derivedStateOf {
                 when (pagerState.currentPage) {
-                    0 -> listOf("Next")
+                    0 -> listOf("", "Next")
                     1 -> listOf("Back", "Next")
                     2 -> listOf("Back", "Next")
                     3 -> listOf("Back", "Get Started")
@@ -53,6 +57,7 @@ fun OnBoardingScreen () {
             OnBoardingPage(page = pages[index])
         }
 
+
         Spacer(modifier = Modifier.weight(1f))
         Row(
             modifier = Modifier
@@ -64,14 +69,13 @@ fun OnBoardingScreen () {
         )
         {
             PageIndicator(
-                modfifier = Modifier.width(PageIndicatorWidth),
+                modifier = Modifier.width(PageIndicatorWidth),
                 pageSize = pages.size,
                 selectedPage = pagerState.currentPage
             )
-        }
 
-        Row(verticalAlignment = Alignment.CenterVertically)
-        {
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
             val scope = rememberCoroutineScope()
 
             if (buttonState.value[0].isNotEmpty()) {
@@ -79,31 +83,36 @@ fun OnBoardingScreen () {
                     text = buttonState.value[0],
                     onClick = {
                         scope.launch {
-                            pagerState.animateScrollToPage(page = pagerState.currentPage -1)
+                               pagerState.animateScrollToPage(page = pagerState.currentPage-1)
                         }
-
                     }
                 )
-
             }
-            NewsButton(
-                text = buttonState.value[1],
-                onClick = {
-                    scope.launch {
-                        if (pagerState.currentPage == 4) {
-                            // TODO: kembali ke Home Screen
-                        } else {
-                            pagerState.animateScrollToPage(
-                                page = pagerState.currentPage + 1
-                            )
+
+                KatolikuButton( // Use KatolikuButton instead of NewsButton
+                    text = buttonState.value[1],
+                    onClick = {
+                        scope.launch {
+                            if (pagerState.currentPage == 3)
+                            {
+                                event(OnBoardingEvent.SaveAppEntry)
+                            } else {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage + 1)
+
+                            }
                         }
-
                     }
+                )
+            }
 
-                })
         }
+         Spacer(modifier = Modifier.weight(0.5f))
+        }
+
     }
-}
+
+
 
 
 

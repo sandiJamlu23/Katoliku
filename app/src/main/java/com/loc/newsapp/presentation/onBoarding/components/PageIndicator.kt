@@ -21,8 +21,8 @@ fun PageIndicator (
     selectedPage: Int,
     selectedColor: Color = MaterialTheme.colorScheme.primary,
     unselectedColor: Color = BlueGray,
-    modfifier: Modifier
-)
+
+    )
 
 {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween)
