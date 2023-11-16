@@ -18,19 +18,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.loc.newsapp.presentation.onBoarding.Dimens.PageIndicatorWidth
 import com.loc.newsapp.presentation.onBoarding.Dimens.mediumPadding2
-import com.loc.newsapp.presentation.onBoarding.common.KatolikuButton
-import com.loc.newsapp.presentation.onBoarding.common.KatolikuTextButton
-import com.loc.newsapp.presentation.onBoarding.components.OnBoardingPage
-import com.loc.newsapp.presentation.onBoarding.components.PageIndicator
+import com.loc.newsapp.presentation.common.KatolikuButton
+import com.loc.newsapp.presentation.common.KatolikuTextButton
+import com.loc.newsapp.presentation.components.OnBoardingPage
+import com.loc.newsapp.presentation.components.PageIndicator
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnBoardingScreen (
-    event:(OnBoardingEvent) -> Unit
+    event:(OnBoardingEvent) -> Unit,
+    viewModel: OnBoardingViewModel,
+    navController: NavController
 ) {
 
     Column(modifier = Modifier.fillMaxSize())
