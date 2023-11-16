@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "569415323263",
+    "project_id": "katolikku-8adf8",
+    "storage_bucket": "katolikku-8adf8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569415323263:android:4b96f84affc8c87688794a",
+        "android_client_info": {
+          "package_name": "com.loc.newsapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5_gi3uHXU6tY266dBt6qhQRT0R2FIVAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
