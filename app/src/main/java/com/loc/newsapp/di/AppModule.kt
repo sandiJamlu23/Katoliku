@@ -2,11 +2,14 @@ package com.loc.newsapp.di
 
 import android.app.Application
 import androidx.room.Room
+import com.google.firebase.auth.FirebaseAuth
 import com.loc.newsapp.data.local.NewsDao
 import com.loc.newsapp.data.local.NewsDatabase
 import com.loc.newsapp.data.local.NewsTypeConvertor
 import com.loc.newsapp.data.manager.LocalUserManagerimpl
 import com.loc.newsapp.data.manager.remote.dto.NewsApi
+import com.loc.newsapp.data.repository.AuthRepository
+import com.loc.newsapp.data.repository.AuthRepositoryImpl
 import com.loc.newsapp.data.repository.NewsRepositoryImpl
 import com.loc.newsapp.domain.manager.LocalUserManager
 import com.loc.newsapp.domain.manager.repository.NewsRepository
@@ -34,6 +37,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth() = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun providesRepositoryImpl(firebaseAuth: FirebaseAuth): AuthRepository{
+        return AuthRepositoryImpl(firebaseAuth)
+    }
 
     @Provides
     @Singleton

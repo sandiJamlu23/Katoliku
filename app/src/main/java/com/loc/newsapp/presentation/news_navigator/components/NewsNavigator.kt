@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -68,8 +67,8 @@ fun NewsNavigator()
     selectedItem = when (backStackState?.destination?.route) {
         Route.HomeScreen.route -> 0
         Route.SearchScreen.route -> 1
-        Route.BookmarkScreen.route -> 2
-        Route.CredoScreen.route -> 3
+        Route.CredoScreen.route -> 2
+        Route.BookmarkScreen.route -> 3
         else -> 0
     }
     //Hide the bottom navigation when the user is in the details screen
